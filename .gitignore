@@ -1,8 +1,8 @@
 env/
 db/
 __pycache__/
-application_key.json
+*-service-*.json
 ai-data.json
-
+.vscode/*
 # Tasks
 *_solution.py
