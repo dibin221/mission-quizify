@@ -1,14 +1,11 @@
 import sys
 import os
 import streamlit as st
-sys.path.append(os.path.abspath('../../'))
-from tasks.task_3.task_3 import DocumentProcessor
-from tasks.task_4.task_4 import EmbeddingClient
-from constants import VertexAIConfig
+#sys.path.append(os.path.abspath('../'))
 
 # Import Task libraries
 from langchain_core.documents import Document
-from langchain.text_splitter import CharacterTextSplitter,RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 
 class ChromaCollectionCreator:
@@ -94,23 +91,3 @@ class ChromaCollectionCreator:
         else:
             st.error("Chroma Collection has not been created!", icon="🚨")
 
-if __name__ == "__main__":
-    processor = DocumentProcessor() # Initialize from Task 3
-    processor.ingest_documents()
-
-    # embed_config = {
-    #     "model_name": VertexAIConfig.EMBED_CONFIG.value,
-    #     "project": "quizify-418619",
-    #     "location": "us-central1"
-    # }
-
-    embed_client = EmbeddingClient(**VertexAIConfig.EMBED_CONFIG.value) # Initialize from Task 4
-
-    chroma_creator = ChromaCollectionCreator(processor, embed_client)
-
-    with st.form("Load Data to Chroma"):
-        st.write("Select PDFs for Ingestion, then click Submit")
-
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            chroma_creator.create_chroma_collection()
