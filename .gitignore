@@ -6,3 +6,4 @@ ai-data.json
 .vscode/*
 # Tasks
 *_solution.py
+local-auth.json
